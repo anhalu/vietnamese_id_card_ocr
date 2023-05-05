@@ -26,7 +26,7 @@ print(resutls)
 #     json.dump(my_dict, f, ensure_ascii=False)
 
 with open("results.json", "w", encoding="utf-8") as outfile:
-    json.dump(resutls, outfile, ensure_ascii=False)
+    json.dump(resutls, outfile, ensure_ascii=False, indent=3)
 
  
 
