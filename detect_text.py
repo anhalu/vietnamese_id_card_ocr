@@ -13,12 +13,12 @@ names_index = {0 : 'id', 1 : 'name', 2 : 'birth' }
 imgWidth = 640 
 imgHeight = 480
 # YOLO 
-sources_model = '/home/anhalu/anhalu-data/AN.LAB/id_card_ocr/model/finalTextDetection.pt'
+sources_model = './model/finalTextDetection.pt'
 model = YOLO(sources_model) 
 
 # VietOcr 
 config = Cfg.load_config_from_name('vgg_transformer')
-config['weights'] = '/home/anhalu/anhalu-data/AN.LAB/id_card_ocr/model/transformerocr.pth' 
+config['weights'] = './model/transformerocr.pth' 
 
 config['device'] = 'cuda:0'
 config['cnn']['pretrained']=False

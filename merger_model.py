@@ -3,15 +3,21 @@ from detect_text import get_text
 from PIL import Image 
 import json 
 import time 
+import argparse 
 
-path_image = '/home/anhalu/anhalu-data/AN.LAB/id_card_ocr/3.jpg' 
+parser = argparse.ArgumentParser(description = "Enter link to the image") 
+parser.add_argument('-l', '--link', required=True, help = "Enter a link or a path") 
 
+args = parser.parse_args() 
+
+link = args.link 
 
 time_start = time.time() 
-cropImage = get_transform(path_image) 
+cropImage = get_transform(link) 
 cropImage = Image.fromarray(cropImage) 
 resutls = get_text(cropImage) 
 time_end = time.time() 
+
 
 print("time run : " + str(time_end - time_start))
 print(resutls)
