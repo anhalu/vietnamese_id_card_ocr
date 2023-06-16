@@ -6,7 +6,7 @@ import shutil
 
 
 def gaussian_blur(img):
-    new_img = img.filter(ImageFilter.GaussianBlur(radius=3))  
+    new_img = img.filter(ImageFilter.GaussianBlur(radius=1))  
     return new_img 
 
 
@@ -36,35 +36,32 @@ def create_mosaic_image(img) :
 
 
 def run(sources_img, sources_label) : 
-    count = 277
-    dir = os.listdir(sources_img)
+    count = 2149
+    # dir = os.listdir(sources_img)
     
-    for item in dir : 
-        img = Image.open(sources_img + '/' + item) 
+    for item in range(1, count) : 
+        img = Image.open(sources_img + '/' + str(item) + '.jpg') 
 
-        new_img = gaussian_blur(img) 
-        new_img.save(sources_img + '/' + str(count) + ".jpg") 
-        shutil.copy(sources_label + '/' + item[:-4] + '.txt', sources_label + '/' + str(count) + '.txt' ) 
-        count += 1
+        # new_img = gaussian_blur(img) 
+        # new_img.save(sources_img + '/' + str(count) + ".jpg") 
+        # shutil.copy(sources_label + '/' + str(item) + '.txt', sources_label + '/' + str(count) + '.txt' ) 
+        # count += 1
         
-        rand = random.uniform(1, 1.3)
-        new_img = change_brightness(new_img, rand)
+        rand = random.uniform(0.8, 1.2)
+        new_img = change_brightness(img, rand)
         new_img.save(sources_img + '/' + str(count) + ".jpg") 
-        shutil.copy(sources_label + '/' + item[:-4] + '.txt', sources_label + '/' + str(count) + '.txt' ) 
+        shutil.copy(sources_label + '/' + str(item) + '.txt', sources_label + '/' + str(count) + '.txt' ) 
         count += 1 
         
-        new_img = create_mosaic_image(new_img) 
-        new_img.save(sources_img + '/' + str(count) + ".jpg") 
-        shutil.copy(sources_label + '/' + item[:-4] + '.txt', sources_label + '/' + str(count) + '.txt' ) 
-        count += 1 
-        
-        
-    
+        # new_img = create_mosaic_image(new_img) 
+        # new_img.save(sources_img + '/' + str(count) + ".jpg") 
+        # shutil.copy(sources_label + '/' + str(item) + '.txt', sources_label + '/' + str(count) + '.txt' ) 
+        # count += 1 
 
 
 if __name__ == "__main__": 
-    sources_img   = '/home/anhalu/anhalu-data/AN.LAB/id_card_ocr/Data/finalDataset/images/train'
-    sources_label = '/home/anhalu/anhalu-data/AN.LAB/id_card_ocr/Data/finalDataset/labels/train' 
+    sources_img   = '/home/anhalu/anhalu-data/AN.LAB/id_card_ocr/anhcat'
+    sources_label = '/home/anhalu/anhalu-data/AN.LAB/id_card_ocr/labels' 
     
     run(sources_img, sources_label) 
 
